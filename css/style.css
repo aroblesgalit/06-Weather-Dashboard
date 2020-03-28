@@ -13,7 +13,10 @@ body {
 
 #searchHistory {
     height: auto;
-    padding: 10px 20px;
+}
+
+.sliderItem {
+    padding: 10px
 }
 
 .cityChip {
@@ -27,4 +30,17 @@ body {
     margin-bottom: 3px;
     margin-left: 8px;
     background-color: #c0c0c0;
+}
+
+.todayWeatherSection {
+    padding: 10px 20px;
+}
+
+
+
+/* For smaller screens */
+@media only screen and (max-width: 768px) {
+    .weatherGraphic {
+        padding: 0;
+    }
 }

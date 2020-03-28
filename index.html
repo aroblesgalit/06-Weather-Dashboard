@@ -40,16 +40,16 @@
     </header>
 
     <!-- Search history bar -->
-    <section id="searchHistory" class="uk-background-muted uk-padding uk-visible-toggle" tabindex="-1" uk-slider>
+    <section id="searchHistory" class="uk-background-muted uk-padding-remove uk-visible-toggle" tabindex="-1" uk-slider>
         <ul class="uk-slider-items uk-grid">
-            <li><button class="uk-button uk-button-default uk-button-small cityChip">Austin <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
-            <li><button class="uk-button uk-button-default uk-button-small cityChip">Chicago <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
-            <li><button class="uk-button uk-button-default uk-button-small cityChip">New York <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
-            <li><button class="uk-button uk-button-default uk-button-small cityChip">Orlando <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
-            <li><button class="uk-button uk-button-default uk-button-small cityChip">San Francisco <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
-            <li><button class="uk-button uk-button-default uk-button-small cityChip">Seattle <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
-            <li><button class="uk-button uk-button-default uk-button-small cityChip">Denver <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
-            <li><button class="uk-button uk-button-default uk-button-small cityChip">Atlanta <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Austin <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Chicago <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">New York <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Orlando <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">San Francisco <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Seattle <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Denver <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Atlanta <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
         </ul>
 
         <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
@@ -58,7 +58,7 @@
 
     <!-- Today's weather data -->
     <section id="todayWeather" class="uk-section">
-        <div class="uk-container">
+        <div class="uk-container todayWeatherSection">
             <div class="uk-grid">
                 <div class="uk-width-2-3 uk-width-1-2@s uk-text-secondary">
                     <div class="uk-text-bold uk-text-large">Austin, TX</div>
@@ -68,7 +68,7 @@
                     <span class="uk-text-small">Wind Speed: </span><span class="uk-text-bold">4.7 MPH</span><br>
                     <span class="uk-text-small">UV Index: </span><span class="uk-text-bold">9.49</span>
                 </div>
-                <div class="uk-width-1-3 uk-width-1-2@s">
+                <div class="uk-width-1-3 uk-width-1-2@s weatherGraphic">
                     <img data-src="https://i.ya-webdesign.com/images/partly-clipart-cloudy-clipart-15.png" alt="Cloudy graphic" width="200px" uk-img>
                     <p class="uk-text-small uk-light uk-margin-remove uk-padding-large uk-padding-remove-vertical">Cloudy</p>
                 </div>
