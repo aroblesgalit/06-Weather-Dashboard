@@ -23,17 +23,19 @@
 <body>
 
     <!-- Header navbar -->
-    <header class="uk-background-secondary uk-light">
-        <nav id="headerNav" class="uk-navbar-transparent uk-navbar-container uk-padding-large uk-padding-remove-top uk-padding-remove-bottom uk-grid"
+    <header>
+        <nav id="headerNav"
+            class="uk-navbar-transparent uk-navbar-container uk-padding-large uk-padding-remove-top uk-padding-remove-bottom uk-grid"
             uk-navbar>
             <div id="logoWrapper" class="uk-navbar-left uk-width-2-3@l uk-width-1-2@s">
-                <span id="logoType" class="uk-navbar-item uk-logo">Weather Dashboard</span>
+                <span id="logoType" class="uk-navbar-item uk-logo uk-light">Weather Dashboard</span>
             </div>
 
             <div id="headerSearchBar" class="uk-navbar-item uk-navbar-right uk-width-1-3@l uk-width-1-2@s">
-                <form id="searchForm" class="uk-search uk-search-default uk-width-1-1">
-                    <a href="" class="uk-search-icon-flip" uk-search-icon></a>
-                    <input id="cityInput" class="uk-search-input" type="search" placeholder="Search city...">
+                <form id="searchForm" class="uk-search uk-width-1-1">
+                    <a id="searchBtn" href="" class="uk-search-icon-flip searchIcon" uk-search-icon></a>
+                    <input id="cityInput" class="uk-search-input searchInput" type="search"
+                        placeholder="Search city...">
                 </form>
             </div>
         </nav>
@@ -42,18 +44,28 @@
     <!-- Search history bar -->
     <section id="searchHistory" class="uk-background-muted uk-padding-remove uk-visible-toggle" tabindex="-1" uk-slider>
         <ul class="uk-slider-items uk-grid">
-            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Austin <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
-            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Chicago <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
-            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">New York <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
-            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Orlando <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
-            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">San Francisco <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
-            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Seattle <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
-            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Denver <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
-            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Atlanta <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Austin
+                    <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Chicago
+                    <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">New
+                    York <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Orlando
+                    <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">San
+                    Francisco <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Seattle
+                    <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Denver
+                    <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
+            <li class="sliderItem uk-padding"><span class="uk-button uk-button-default uk-button-small cityChip">Atlanta
+                    <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></span></li>
         </ul>
 
-        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+        <!-- <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+            uk-slider-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+            uk-slider-item="next"></a> -->
     </section>
 
     <!-- Today's weather data -->
@@ -63,14 +75,17 @@
                 <div class="uk-width-2-3 uk-width-1-2@s uk-text-secondary">
                     <div class="uk-text-bold uk-text-large">Austin, TX</div>
                     <div class="">March 28, 10:01 AM</div>
-                    <div class="uk-heading-2xlarge uk-margin-remove">87<span class="uk-heading-large uk-text-top">&#176F</span></div>
+                    <div class="uk-heading-2xlarge uk-margin-remove">87<span
+                            class="uk-heading-large uk-text-top">&#176F</span></div>
                     <span class="uk-text-small">Humidity: </span><span class="uk-text-bold">40&#37</span><br>
                     <span class="uk-text-small">Wind Speed: </span><span class="uk-text-bold">4.7 MPH</span><br>
                     <span class="uk-text-small">UV Index: </span><span class="uk-text-bold">9.49</span>
                 </div>
                 <div class="uk-width-1-3 uk-width-1-2@s weatherGraphic">
-                    <img data-src="https://i.ya-webdesign.com/images/partly-clipart-cloudy-clipart-15.png" alt="Cloudy graphic" width="200px" uk-img>
-                    <p class="uk-text-small uk-light uk-margin-remove uk-padding-large uk-padding-remove-vertical">Cloudy</p>
+                    <img data-src="https://i.ya-webdesign.com/images/partly-clipart-cloudy-clipart-15.png"
+                        alt="Cloudy graphic" width="200px" uk-img>
+                    <p class="uk-text-small uk-light uk-margin-remove uk-padding-large uk-padding-remove-vertical">
+                        Cloudy</p>
                 </div>
             </div>
         </div>
@@ -78,7 +93,73 @@
 
     <!-- 5-day forecast -->
     <section id="fiveDayForecast" class="uk-section uk-background-muted uk-height-1-1">
-
+        <div class="uk-container fiveDaySection">
+            <div class="uk-grid">
+                <div class="uk-width-1-1 uk-margin">
+                    <span class="uk-text-large uk-text-muted">5-Day Forecast</span>
+                </div>
+                <div class="uk-width-1-5@m uk-width-1-3@s uk-light forecastCardWrapper">
+                    <div class="uk-card uk-card-body uk-flex uk-flex-column uk-flex-middle forecastCard">
+                        <span class="uk-text-bold forecastDate">Saturday, Mar 28</span>
+                        <img data-src="https://i.ya-webdesign.com/images/partly-clipart-cloudy-clipart-15.png"
+                            alt="Cloudy graphic" width="40px" uk-img>
+                        <div class="uk-heading-medium uk-margin-remove">87<span
+                                class="uk-heading-small uk-text-top">&#176F</span></div>
+                        <div class="humidityForecast">
+                            <span class="uk-text-small">Humidity: </span><span class="uk-text-bold">40&#37</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-5@m uk-width-1-3@s uk-light forecastCardWrapper">
+                    <div class="uk-card uk-card-body uk-flex uk-flex-column uk-flex-middle forecastCard">
+                        <span class="uk-text-bold forecastDate">Sunday, Mar 29</span>
+                        <img data-src="https://i.ya-webdesign.com/images/partly-clipart-cloudy-clipart-15.png"
+                            alt="Cloudy graphic" width="40px" uk-img>
+                        <div class="uk-heading-medium uk-margin-remove">87<span
+                                class="uk-heading-small uk-text-top">&#176F</span></div>
+                        <div class="humidityForecast">
+                            <span class="uk-text-small">Humidity: </span><span class="uk-text-bold">40&#37</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-5@m uk-width-1-3@s uk-light forecastCardWrapper">
+                    <div class="uk-card uk-card-body uk-flex uk-flex-column uk-flex-middle forecastCard">
+                        <span class="uk-text-bold forecastDate">Monday, Mar 30</span>
+                        <img data-src="https://i.ya-webdesign.com/images/partly-clipart-cloudy-clipart-15.png"
+                            alt="Cloudy graphic" width="40px" uk-img>
+                        <div class="uk-heading-medium uk-margin-remove">87<span
+                                class="uk-heading-small uk-text-top">&#176F</span></div>
+                        <div class="humidityForecast">
+                            <span class="uk-text-small">Humidity: </span><span class="uk-text-bold">40&#37</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-5@m uk-width-1-3@s uk-light forecastCardWrapper">
+                    <div class="uk-card uk-card-body uk-flex uk-flex-column uk-flex-middle forecastCard">
+                        <span class="uk-text-bold forecastDate">Tuesday, Mar 31</span>
+                        <img data-src="https://i.ya-webdesign.com/images/partly-clipart-cloudy-clipart-15.png"
+                            alt="Cloudy graphic" width="40px" uk-img>
+                        <div class="uk-heading-medium uk-margin-remove">87<span
+                                class="uk-heading-small uk-text-top">&#176F</span></div>
+                        <div class="humidityForecast">
+                            <span class="uk-text-small">Humidity: </span><span class="uk-text-bold">40&#37</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1-5@m uk-width-1-3@s uk-light forecastCardWrapper">
+                    <div class="uk-card uk-card-body uk-flex uk-flex-column uk-flex-middle forecastCard">
+                        <span class="uk-text-bold forecastDate">Wednesday, Apr 1</span>
+                        <img data-src="https://i.ya-webdesign.com/images/partly-clipart-cloudy-clipart-15.png"
+                            alt="Cloudy graphic" width="40px" uk-img>
+                        <div class="uk-heading-medium uk-margin-remove">87<span
+                                class="uk-heading-small uk-text-top">&#176F</span></div>
+                        <div class="humidityForecast">
+                            <span class="uk-text-small">Humidity: </span><span class="uk-text-bold">40&#37</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
 

@@ -1,8 +1,26 @@
+html {
+    --dark-color: #152951;
+}
+
 body {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
+}
+
+header {
+    background-color: var(--dark-color);
+}
+
+.searchInput {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.searchIcon {
+    padding: 10px;
 }
 
 #todayWeather {
@@ -34,6 +52,20 @@ body {
 
 .todayWeatherSection {
     padding: 10px 20px;
+}
+
+.forecastCardWrapper {
+    margin-bottom: 20px;
+}
+
+.forecastCard {
+    padding: 20px 10px;
+    border-radius: 8px;
+    background-color: var(--dark-color);
+}
+
+.forecastDate {
+    margin-bottom: 10px;
 }
 
 
