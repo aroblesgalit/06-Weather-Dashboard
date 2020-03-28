@@ -31,7 +31,7 @@ THEN I am again presented with current and future conditions for that city
 
 The following image demonstrates the application functionality:
 
-![weather dashboard demo](./Assets/06-server-side-apis-homework-demo.png)
+![weather dashboard demo](./assets/images/06-server-side-apis-homework-demo.png)
 
 ## Deployed Application
 [Weather Dashboard](https://aroblesgalit.github.io/06-Weather-Dashboard/)
