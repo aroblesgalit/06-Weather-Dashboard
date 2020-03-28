@@ -16,6 +16,10 @@ $(document).ready(function () {
 
             var curCity = response.name;
             var curDateTime = moment().format('MMM Do, h:mm a');
+            var curKelvinTemp = response.main.temp;
+            var curFahrenheit = ((curKelvinTemp - 273.15) * 1.80 + 32).toFixed();
+            var curHumidity = response.main.humidity;
+            var curWindSpeed = response.wind.speed;
 
             renderData();
 
@@ -41,8 +45,12 @@ $(document).ready(function () {
                 // Set contexts
                 currentDataCity.text(curCity); // Get city from response
                 currentDataDate.text(curDateTime); // Use moment.js
-                currentDataTemp.text() // Get temp from response
-                currentDataTempUnit.text("&#176F");
+                currentDataTemp.text(curFahrenheit); // Get temp from response
+                currentDataTempUnit.html("&#176F");
+                currentHumidityLabel.text("Humidity: ");
+                currentHumidityVal.text(curHumidity + "%");
+                currentWindSpeedLabel.text("Wind Speed: ");
+                currentWindSpeedVal.text(curWindSpeed + "kph")
                 // Append
                 currentDataUVIndex.append(currentUVIndexLabel).append(currentUVIndexVal);
                 currentDataWindSpeed.append(currentWindSpeedLabel).append(currentWindSpeedVal);
