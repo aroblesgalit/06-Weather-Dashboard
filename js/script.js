@@ -20,6 +20,8 @@ $(document).ready(function () {
             var curFahrenheit = ((curKelvinTemp - 273.15) * 1.80 + 32).toFixed();
             var curHumidity = response.main.humidity;
             var curWindSpeed = response.wind.speed;
+            var curWeatherIcon = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png" ;
+            var curWeatherDes = response.weather[0].description;
 
             renderData();
 
@@ -42,6 +44,8 @@ $(document).ready(function () {
                 var currentDataUVIndex = $("<div>");
                 var currentUVIndexLabel = $("<span>").addClass("uk-text-small");
                 var currentUVIndexVal = $("<span>").addClass("uk-text-bold");;
+                var currentWeatherImage = $("<img>");
+                var currentWeatherDescription = $("<p>").addClass("uk-text-small uk-light uk-margin-remove uk-padding-large uk-padding-remove-vertical");
                 // Set contexts
                 currentDataCity.text(curCity); // Get city from response
                 currentDataDate.text(curDateTime); // Use moment.js
@@ -50,13 +54,18 @@ $(document).ready(function () {
                 currentHumidityLabel.text("Humidity: ");
                 currentHumidityVal.text(curHumidity + "%");
                 currentWindSpeedLabel.text("Wind Speed: ");
-                currentWindSpeedVal.text(curWindSpeed + "kph")
+                currentWindSpeedVal.text(curWindSpeed + "kph");
+                currentWeatherImage.attr({"data-src": curWeatherIcon, alt: "Weather Icon", "uk-img": "", width: "200px"});
+                // currentWeatherImage.attr({"data-src": curWeatherIcon, alt: "Weather Icon", width: "200px"});
+                currentWeatherDescription.text(curWeatherDes);
+
                 // Append
                 currentDataUVIndex.append(currentUVIndexLabel).append(currentUVIndexVal);
                 currentDataWindSpeed.append(currentWindSpeedLabel).append(currentWindSpeedVal);
                 currentDataHumidity.append(currentHumidityLabel).append(currentHumidityVal);
                 currentDataTemp.append(currentDataTempUnit);
                 currentDataText.append(currentDataCity).append(currentDataDate).append(currentDataTemp).append(currentDataHumidity).append(currentDataWindSpeed).append(currentDataUVIndex);
+                currentDataGraphic.append(currentWeatherImage).append(currentWeatherDescription);
                 currentWeatherData.append(currentDataText).append(currentDataGraphic);
                 $(".todayWeatherSection").append(currentWeatherData);
             }
