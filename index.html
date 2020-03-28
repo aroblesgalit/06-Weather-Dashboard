@@ -22,6 +22,65 @@
 
 <body>
 
+    <!-- Header navbar -->
+    <header class="uk-background-secondary uk-light">
+        <nav class="uk-navbar-transparent uk-navbar-container uk-padding-large uk-padding-remove-top uk-padding-remove-bottom uk-grid"
+            uk-navbar>
+            <div class="uk-navbar-left uk-width-2-3@l uk-width-1-2@s">
+                <a class="uk-navbar-item uk-logo" href="#">Weather Dashboard</a>
+            </div>
+
+            <div class="uk-navbar-item uk-navbar-right uk-width-1-3@l uk-width-1-2@s">
+                <form class="uk-search uk-search-default uk-width-1-1">
+                    <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+                    <input id="cityInput" class="uk-search-input" type="search" placeholder="Search city...">
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search history bar -->
+    <section id="searchHistory" class="uk-background-muted uk-padding uk-visible-toggle" tabindex="-1" uk-slider>
+        <ul class="uk-slider-items uk-grid">
+            <li><button class="uk-button uk-button-default uk-button-small cityChip">Austin <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+            <li><button class="uk-button uk-button-default uk-button-small cityChip">Chicago <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+            <li><button class="uk-button uk-button-default uk-button-small cityChip">New York <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+            <li><button class="uk-button uk-button-default uk-button-small cityChip">Orlando <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+            <li><button class="uk-button uk-button-default uk-button-small cityChip">San Francisco <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+            <li><button class="uk-button uk-button-default uk-button-small cityChip">Seattle <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+            <li><button class="uk-button uk-button-default uk-button-small cityChip">Denver <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+            <li><button class="uk-button uk-button-default uk-button-small cityChip">Atlanta <span class="uk-icon-button uk-light closeBtn" uk-icon="close"></span></button></li>
+        </ul>
+
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+    </section>
+
+    <!-- Today's weather data -->
+    <section id="todayWeather" class="uk-section">
+        <div class="uk-container">
+            <div class="uk-grid">
+                <div class="uk-width-2-3 uk-width-1-2@s uk-text-secondary">
+                    <div class="uk-text-bold uk-text-large">Austin, TX</div>
+                    <div class="">March 28, 10:01 AM</div>
+                    <div class="uk-heading-2xlarge uk-margin-remove">87<span class="uk-heading-large uk-text-top">&#176F</span></div>
+                    <span class="uk-text-small">Humidity: </span><span class="uk-text-bold">40&#37</span><br>
+                    <span class="uk-text-small">Wind Speed: </span><span class="uk-text-bold">4.7 MPH</span><br>
+                    <span class="uk-text-small">UV Index: </span><span class="uk-text-bold">9.49</span>
+                </div>
+                <div class="uk-width-1-3 uk-width-1-2@s">
+                    <img data-src="https://i.ya-webdesign.com/images/partly-clipart-cloudy-clipart-15.png" alt="Cloudy graphic" width="200px" uk-img>
+                    <p class="uk-text-small uk-light uk-margin-remove uk-padding-large uk-padding-remove-vertical">Cloudy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5-day forecast -->
+    <section id="fiveDayForecast" class="uk-section uk-background-muted uk-height-1-1">
+
+    </section>
+
 
 </body>
 
