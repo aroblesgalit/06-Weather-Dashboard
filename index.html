@@ -24,14 +24,14 @@
 
     <!-- Header navbar -->
     <header class="uk-background-secondary uk-light">
-        <nav class="uk-navbar-transparent uk-navbar-container uk-padding-large uk-padding-remove-top uk-padding-remove-bottom uk-grid"
+        <nav id="headerNav" class="uk-navbar-transparent uk-navbar-container uk-padding-large uk-padding-remove-top uk-padding-remove-bottom uk-grid"
             uk-navbar>
-            <div class="uk-navbar-left uk-width-2-3@l uk-width-1-2@s">
-                <a class="uk-navbar-item uk-logo" href="#">Weather Dashboard</a>
+            <div id="logoWrapper" class="uk-navbar-left uk-width-2-3@l uk-width-1-2@s">
+                <span id="logoType" class="uk-navbar-item uk-logo">Weather Dashboard</span>
             </div>
 
-            <div class="uk-navbar-item uk-navbar-right uk-width-1-3@l uk-width-1-2@s">
-                <form class="uk-search uk-search-default uk-width-1-1">
+            <div id="headerSearchBar" class="uk-navbar-item uk-navbar-right uk-width-1-3@l uk-width-1-2@s">
+                <form id="searchForm" class="uk-search uk-search-default uk-width-1-1">
                     <a href="" class="uk-search-icon-flip" uk-search-icon></a>
                     <input id="cityInput" class="uk-search-input" type="search" placeholder="Search city...">
                 </form>
