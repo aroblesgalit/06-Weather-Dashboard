@@ -52,6 +52,12 @@ $(document).ready(function () {
         renderSearchHistory();
     }
 
+    // Listen to an event when a button from the search history bar is clicked
+
+
+    // Listen to an event when a close button is clicked
+
+
     // Add a submit event to the search form
     $("#searchForm").on("submit", function (e) {
         e.preventDefault();
@@ -73,10 +79,11 @@ $(document).ready(function () {
         if (inputValue !== "" && searchHistoryArr.indexOf(inputValue) == -1) {
             // Push it into the array
             searchHistoryArr.push(inputValue);
-            // // Then clear the input field
-            // $("#cityInput").val("");
+            // Store array into localstorage and render to screen
             storeSearchHistory();
             renderSearchHistory();
+            // Then clear the input field
+            $("#cityInput").val("");
         }
 
 
