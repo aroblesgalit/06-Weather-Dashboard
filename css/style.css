@@ -1,5 +1,10 @@
 html {
     --dark-color: #152951;
+    --very-low: #00cccc;
+    --low: #66cc33;
+    --moderate: #ff9900;
+    --high: #ff3300;
+    --very-high: #ff3399;
 }
 
 body {
@@ -67,6 +72,13 @@ header {
 
 .forecastDate {
     margin-bottom: 10px;
+}
+
+.uvIndex {
+    color: var(--very-low);
+    padding: 2px 10px;
+    border-radius: 4px;
+    background-color: #f2f2f2;
 }
 
 

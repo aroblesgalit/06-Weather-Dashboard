@@ -36,8 +36,8 @@ $(document).ready(function () {
             function renderData() {
                 // Create divs and add classes
                 var currentWeatherData = $("<div>").addClass("uk-grid");
-                var currentDataText = $("<div>").addClass("uk-width-2-3 uk-width-1-2@s uk-text-secondary dataText");
-                var currentDataGraphic = $("<div>").addClass("uk-width-1-3 uk-width-1-2@s weatherGraphic");
+                var currentDataText = $("<div>").addClass("uk-width-1-2 uk-text-secondary dataText");
+                var currentDataGraphic = $("<div>").addClass("uk-width-1-2 weatherGraphic");
                 var currentDataCity = $("<div>").addClass("uk-text-bold uk-text-large");
                 var currentDataDate = $("<div>");
                 var currentDataTemp = $("<div>").addClass("uk-heading-2xlarge uk-margin-remove");
@@ -87,14 +87,26 @@ $(document).ready(function () {
                 function renderUVIndex() {
                     var currentDataText = $(".dataText");
                     
-                    // Create divs
+                    // Create divs and add class
                     var currentDataUVIndex = $("<div>");
                     var currentUVIndexLabel = $("<span>").addClass("uk-text-small");
-                    var currentUVIndexVal = $("<span>").addClass("uk-text-bold");
+                    var currentUVIndexVal = $("<span>").addClass("uk-text-bold uvIndex");
 
-                    // Set text context
+                    // Set contexts
                     currentUVIndexLabel.text("UV Index: ");
                     currentUVIndexVal.text(uvIndexVal);
+
+                    if (uvIndexVal >= 0 && uvIndexVal < 3) {
+                        currentUVIndexVal.css("color", "var(--very-low)");
+                    } else if (uvIndexVal >= 3 && uvIndexVal < 5) {
+                        currentUVIndexVal.css("color", "var(--low)");
+                    } else if (uvIndexVal >= 5 && uvIndexVal < 7) {
+                        currentUVIndexVal.css("color", "var(--moderate)");
+                    } else if (uvIndexVal >= 7 && uvIndexVal < 10) {
+                        currentUVIndexVal.css("color", "var(--high)");
+                    } else if (uvIndexVal >= 10) {
+                        currentUVIndexVal.css("color", "var(--very-high)");
+                    }
 
                     // Append
                     currentDataUVIndex.append(currentUVIndexLabel).append(currentUVIndexVal);
