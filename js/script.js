@@ -64,7 +64,9 @@ $(document).ready(function () {
     })
 
     // Listen to an event when a close button is clicked
-    $(document).on("click", ".closeBtn", function () {
+    $(document).on("click", ".closeBtn", function (e) {
+        // Stop propagation
+        e.stopPropagation();
         // Get the text of it's parent element
         var cityChipText = $(this).parent().text();
         // Find its index in the search history array
