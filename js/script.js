@@ -1,4 +1,56 @@
 $(document).ready(function () {
+
+    // // Target search history section to append new Ul and li's to it
+    // var searchHistorySection = $("#searchHistory");
+
+    // // Create a search history array
+    // var searchHistoryArr = [];
+
+    // // Store array into local storage
+    // localStorage.setItem("searchHistoryArr", JSON.stringify(searchHistoryArr));
+    // // Get array back from local storage
+    // localStorage.getItem("searchHistoryArr");
+    // // Render array on screen
+    // renderSearchHistory();
+    // // Create a function to render search history
+    // function renderSearchHistory() {
+    //     // Clear the search history section
+    //     searchHistorySection.html("");
+    //     // Create ul and add classes
+    //     var searchHistoryUl = $("<ul>").addClass("uk-slider-items uk-grid");
+    //     for (var i = 0; i < searchHistoryArr.length; i++) {
+    //         // Create li's and add classes
+    //         var newSearchLi = $("<li>").addClass("sliderItem uk-padding");
+    //         var newSearchSpan = $("<span>").addClass("uk-button uk-button-default uk-button-small cityChip");
+    //         var newSearchDelete = $("<span>").addClass("uk-icon-button uk-light closeBtn");
+    //         // Set contexts
+    //         newSearchSpan.text(searchHistoryArr[i]);
+    //         newSearchDelete.attr("uk-icon", "close");
+    //         // Append each to the Ul
+    //         newSearchSpan.append(newSearchDelete);
+    //         newSearchLi.append(newSearchSpan);
+    //         searchHistoryUl.append(newSearchLi);
+    //     }
+    //     // Append Ul to the search history section
+    //     searchHistorySection.append(searchHistoryUl);
+    // }
+
+    // init();
+
+    // // Create an init function
+    // function init() {
+    //     // Get search history array from localStorage
+    //     // Parse json string to object
+    //     var storedSearchHistoryArr = JSON.parse(localStorage.getItem("searchHistoryArr"));
+    //     // If array were retrieved from localStorage, update the todos array to it
+    //     if (storedSearchHistoryArr !== null) {
+    //         searchHistoryArr = storedSearchHistoryArr;
+    //     }
+
+    //     // Render array to the DOM
+    //     renderSearchHistory();
+    // }
+
     // Add a submit event to the search form
     $("#searchForm").on("submit", function (e) {
         e.preventDefault();
@@ -8,18 +60,28 @@ $(document).ready(function () {
         // Clear section of any html
         todayWeatherSection.empty();
         // Get value from the input field
-        var inputValue = $("#cityInput").val();
+        var inputValue = $("#cityInput").val().trim();
         // Store api key
         var APIKey = "5af80191049a5aac0e5b1a43d2d1ccfe";
         // Store queryURL with the proper strings
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + inputValue + "&appid=" + APIKey;
+
+
+        // // If the inputValue is not empty
+        // if (inputValue !== "") {
+        //     // Push it into the array
+        //     searchHistoryArr.push(inputValue);
+        //     // // Then clear the input field
+        //     // $("#cityInput").val("");
+        // }
+
 
         // Use ajax to get data for the city
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            
+
             // Use response to get the necessary data: City name, Temperature in Fahrenheit, Humidity, Wind speed, and Coordinates (to use for UV Index)
             var curCity = response.name;
             var curDateTime = moment().format('MMM Do, h:mm a'); // Get current time using moment.js
@@ -27,7 +89,7 @@ $(document).ready(function () {
             var curFahrenheit = ((curKelvinTemp - 273.15) * 1.80 + 32).toFixed();
             var curHumidity = response.main.humidity;
             var curWindSpeed = response.wind.speed;
-            var curWeatherIcon = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png";
+            var curWeatherIcon = "https://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png";
             var curWeatherDes = response.weather[0].description;
             var cityLat = response.coord.lat;
             var cityLon = response.coord.lon;
@@ -77,12 +139,12 @@ $(document).ready(function () {
 
 
             // Store the queryURL needed to get the data for UV Index
-            var queryURL2 = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + cityLat + "&lon=" + cityLon;
+            var queryURL2 = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + cityLat + "&lon=" + cityLon;
             // Use a separate ajax call for getting the UV Index with a different queryURL
             $.ajax({
                 url: queryURL2,
                 method: "GET"
-            }).then(function(response) {
+            }).then(function (response) {
                 // Get the UV Index value and store in a variable
                 var uvIndexVal = response.value;
 
@@ -93,7 +155,7 @@ $(document).ready(function () {
                 function renderUVIndex() {
                     // Target the div where to append the UV Index
                     var currentDataText = $(".dataText");
-                    
+
                     // Create divs and add class
                     var currentDataUVIndex = $("<div>").addClass("otherInfo");
                     var currentUVIndexLabel = $("<span>").addClass("uk-text-small");
@@ -119,6 +181,20 @@ $(document).ready(function () {
                     currentDataText.append(currentDataUVIndex);
                 }
             })
+
+
+
+            // Store the queryURL needed to get the data for the 5-day forecast
+            var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?q=" + inputValue + "&appid=" + APIKey;
+            console.log(queryURL3)
+            // Use a separate ajax call for getting the UV Index with a different queryURL
+            $.ajax({
+                url: queryURL3,
+                method: "GET"
+            }).then(function(response) {
+                console.log(response);
+            })
+
 
         })
     })
