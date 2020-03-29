@@ -76,6 +76,10 @@ header {
     color: #f2f2f2;
 }
 
+#fiveDayForecast {
+    padding-top: 30px;
+}
+
 .forecastCardWrapper {
     margin-bottom: 20px;
 }
