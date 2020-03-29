@@ -17,7 +17,7 @@ $(document).ready(function () {
         // Clear the search history section
         searchHistorySection.html("");
         // Create ul and add classes
-        var searchHistoryUl = $("<ul>").addClass("uk-slider-items uk-grid");
+        var searchHistoryUl = $("<ul>").addClass("uk-slider-items uk-grid cityChips");
         for (var i = 0; i < searchHistoryArr.length; i++) {
             // Create li's and add classes
             var newSearchLi = $("<li>").addClass("sliderItem uk-padding");
@@ -53,10 +53,24 @@ $(document).ready(function () {
     }
 
     // Listen to an event when a button from the search history bar is clicked
+    $(document).on("click", ".cityChip", function() {
+        var cityChipText = $(this).text();            
 
+    })
 
     // Listen to an event when a close button is clicked
-
+    $(document).on("click", ".closeBtn", function() {
+        // Get the text of it's parent element
+        var cityChipText = $(this).parent().text();
+        // Find its index in the search history array
+        var cityChipIndex = searchHistoryArr.indexOf(cityChipText);
+        // Remove it from the array
+        searchHistoryArr.splice(cityChipIndex, 1);
+        // Store it in the localStorage
+        storeSearchHistory();
+        // Get the updated array back from the localStorage and render on screen
+        renderSearchHistory();
+    })
 
     // Add a submit event to the search form
     $("#searchForm").on("submit", function (e) {
@@ -276,6 +290,8 @@ $(document).ready(function () {
 
 
         })
+        // Clear the input field
+        $("#cityInput").val("");
     })
 
 
