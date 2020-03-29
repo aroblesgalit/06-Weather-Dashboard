@@ -80,7 +80,8 @@ $(document).ready(function () {
         var todayWeatherSection = $(".todayWeatherSection");
         // Clear section of any html
         todayWeatherSection.empty();
-        $(".fiveDaySection").empty();
+        // $(".fiveDaySection").empty();
+        $(".fiveDaySection").children().not(':first').remove();
         // Get value from the input field
         var inputValue = $("#cityInput").val().trim();
         // Store api key
