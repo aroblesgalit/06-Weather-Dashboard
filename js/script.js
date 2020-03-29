@@ -1,55 +1,56 @@
 $(document).ready(function () {
 
-    // // Target search history section to append new Ul and li's to it
-    // var searchHistorySection = $("#searchHistory");
+    // Target search history section to append new Ul and li's to it
+    var searchHistorySection = $("#searchHistory");
 
-    // // Create a search history array
-    // var searchHistoryArr = [];
+    // Create a search history array
+    var searchHistoryArr = [];
 
-    // // Store array into local storage
-    // localStorage.setItem("searchHistoryArr", JSON.stringify(searchHistoryArr));
-    // // Get array back from local storage
-    // localStorage.getItem("searchHistoryArr");
-    // // Render array on screen
-    // renderSearchHistory();
-    // // Create a function to render search history
-    // function renderSearchHistory() {
-    //     // Clear the search history section
-    //     searchHistorySection.html("");
-    //     // Create ul and add classes
-    //     var searchHistoryUl = $("<ul>").addClass("uk-slider-items uk-grid");
-    //     for (var i = 0; i < searchHistoryArr.length; i++) {
-    //         // Create li's and add classes
-    //         var newSearchLi = $("<li>").addClass("sliderItem uk-padding");
-    //         var newSearchSpan = $("<span>").addClass("uk-button uk-button-default uk-button-small cityChip");
-    //         var newSearchDelete = $("<span>").addClass("uk-icon-button uk-light closeBtn");
-    //         // Set contexts
-    //         newSearchSpan.text(searchHistoryArr[i]);
-    //         newSearchDelete.attr("uk-icon", "close");
-    //         // Append each to the Ul
-    //         newSearchSpan.append(newSearchDelete);
-    //         newSearchLi.append(newSearchSpan);
-    //         searchHistoryUl.append(newSearchLi);
-    //     }
-    //     // Append Ul to the search history section
-    //     searchHistorySection.append(searchHistoryUl);
-    // }
+    // Store array into local storage
+    function storeSearchHistory() {
+        localStorage.setItem("searchHistoryArr", JSON.stringify(searchHistoryArr));
+    }
 
-    // init();
 
-    // // Create an init function
-    // function init() {
-    //     // Get search history array from localStorage
-    //     // Parse json string to object
-    //     var storedSearchHistoryArr = JSON.parse(localStorage.getItem("searchHistoryArr"));
-    //     // If array were retrieved from localStorage, update the todos array to it
-    //     if (storedSearchHistoryArr !== null) {
-    //         searchHistoryArr = storedSearchHistoryArr;
-    //     }
+    // Create a function to render search history
+    function renderSearchHistory() {
+        // Clear the search history section
+        searchHistorySection.html("");
+        // Create ul and add classes
+        var searchHistoryUl = $("<ul>").addClass("uk-slider-items uk-grid");
+        for (var i = 0; i < searchHistoryArr.length; i++) {
+            // Create li's and add classes
+            var newSearchLi = $("<li>").addClass("sliderItem uk-padding");
+            var newSearchSpan = $("<span>").addClass("uk-button uk-button-default uk-button-small cityChip");
+            var newSearchDelete = $("<span>").addClass("uk-icon-button uk-light closeBtn");
+            // Set contexts
+            newSearchSpan.text(searchHistoryArr[i]);
+            newSearchDelete.attr("uk-icon", "close");
+            // Append each to the Ul
+            newSearchSpan.append(newSearchDelete);
+            newSearchLi.append(newSearchSpan);
+            searchHistoryUl.prepend(newSearchLi);
+        }
+        // Append Ul to the search history section
+        searchHistorySection.append(searchHistoryUl);
+    }
 
-    //     // Render array to the DOM
-    //     renderSearchHistory();
-    // }
+    init();
+
+    // Create an init function
+    function init() {
+        // Get search history array from localStorage
+
+        // Get array back from local storage
+        var storedSearchHistory = JSON.parse(localStorage.getItem("searchHistoryArr"));
+        // If array were retrieved from localStorage, update the todos array to it
+        if (storedSearchHistory !== null) {
+            searchHistoryArr = storedSearchHistory;
+        }
+
+        // Render array to the DOM
+        renderSearchHistory();
+    }
 
     // Add a submit event to the search form
     $("#searchForm").on("submit", function (e) {
@@ -68,13 +69,15 @@ $(document).ready(function () {
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + inputValue + "&appid=" + APIKey;
 
 
-        // // If the inputValue is not empty
-        // if (inputValue !== "") {
-        //     // Push it into the array
-        //     searchHistoryArr.push(inputValue);
-        //     // // Then clear the input field
-        //     // $("#cityInput").val("");
-        // }
+        // If the inputValue is not empty
+        if (inputValue !== "" && searchHistoryArr.indexOf(inputValue) == -1) {
+            // Push it into the array
+            searchHistoryArr.push(inputValue);
+            // // Then clear the input field
+            // $("#cityInput").val("");
+            storeSearchHistory();
+            renderSearchHistory();
+        }
 
 
         // Use ajax to get data for the city
@@ -82,7 +85,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
+
             // Use response to get the necessary data: City name, Temperature in Fahrenheit, Humidity, Wind speed, and Coordinates (to use for UV Index)
             var curCity = response.name;
             var curDateTime = moment().format('MMM Do, h:mm a'); // Get current time using moment.js
@@ -229,7 +232,7 @@ $(document).ready(function () {
                             var forecastIcon = listArray[i].weather[0].icon;
                             var forecastIconUrl = "https://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
                             var forecastTempK = listArray[i].main.temp;
-                            var forecastHumidity = listArray[i].main.humidity;                           
+                            var forecastHumidity = listArray[i].main.humidity;
                             // Convert temp to F
                             var forecastTempF = ((forecastTempK - 273.15) * 1.80 + 32).toFixed();
                             // Create divs and add classes
@@ -244,7 +247,7 @@ $(document).ready(function () {
                             var forecastHumidityVal = $("<span>").addClass("uk-text-bold");
                             // Set the contexts
                             forecastDateSpan.text(forecastDayDate);
-                            forecastIconImg.attr({"data-src": forecastIconUrl, alt: "Weather icon", width: "40px", "uk-img": ""});
+                            forecastIconImg.attr({ "data-src": forecastIconUrl, alt: "Weather icon", width: "40px", "uk-img": "" });
                             forecastTempDiv.text(forecastTempF);
                             forecastTempUnitSpan.html("&#176F");
                             forecastHumidityLabel.text("Humidity: ");
