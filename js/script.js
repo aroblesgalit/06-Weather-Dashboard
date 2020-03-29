@@ -40,16 +40,30 @@ $(document).ready(function () {
     // Create an init function
     function init() {
         // Get search history array from localStorage
-
-        // Get array back from local storage
         var storedSearchHistory = JSON.parse(localStorage.getItem("searchHistoryArr"));
         // If array were retrieved from localStorage, update the todos array to it
         if (storedSearchHistory !== null) {
             searchHistoryArr = storedSearchHistory;
         }
-
         // Render array to the DOM
         renderSearchHistory();
+
+        // Render background color
+        renderBackground();
+    }
+
+    // Create a funciton to change the background gradient depending on current time
+    function renderBackground() {
+        // Target the todayWeather section
+        var todayWeather = $("#todayWeather");
+        // Get the current hour using moment.js in the 24 hour format
+        var currentHour = moment().format('H');
+        console.log(currentHour)
+        if (currentHour >= 6 && currentHour < 19) {
+            todayWeather.css("background-image", "var(--daytime)");
+        } else {
+            todayWeather.css("background-image", "var(--nighttime)");
+        }
     }
 
     // Declare global variable inputValue for use on events
