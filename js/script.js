@@ -3,6 +3,10 @@ $(document).ready(function () {
     $("#searchForm").on("submit", function (e) {
         e.preventDefault();
 
+        var todayWeatherSection = $(".todayWeatherSection");
+        // Clear section
+        todayWeatherSection.empty();
+
         var inputValue = $("#cityInput").val();
         var APIKey = "5af80191049a5aac0e5b1a43d2d1ccfe";
 
@@ -37,7 +41,7 @@ $(document).ready(function () {
                 // Create divs and add classes
                 var currentWeatherData = $("<div>").addClass("uk-grid");
                 var currentDataText = $("<div>").addClass("uk-width-1-2 uk-text-secondary dataText");
-                var currentDataGraphic = $("<div>").addClass("uk-width-1-2 weatherGraphic");
+                var currentDataGraphic = $("<div>").addClass("uk-width-1-2 uk-flex uk-flex-column uk-flex-middle weatherGraphic");
                 var currentDataCity = $("<div>").addClass("uk-text-bold uk-text-large");
                 var currentDataDate = $("<div>");
                 var currentDataTemp = $("<div>").addClass("uk-heading-2xlarge uk-margin-remove");
@@ -70,7 +74,7 @@ $(document).ready(function () {
                 currentDataText.append(currentDataCity).append(currentDataDate).append(currentDataTemp).append(currentDataHumidity).append(currentDataWindSpeed);
                 currentDataGraphic.append(currentWeatherImage).append(currentWeatherDescription);
                 currentWeatherData.append(currentDataText).append(currentDataGraphic);
-                $(".todayWeatherSection").append(currentWeatherData);
+                todayWeatherSection.append(currentWeatherData);
             }
 
             // var cityCoord = localStorage.getItem("cityCoord");
