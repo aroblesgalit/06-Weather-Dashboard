@@ -326,5 +326,14 @@ $(document).ready(function () {
         displayWeatherData();
     })
 
+    // Add a click event to the search button
+    $("#searchBtn").on("click", function (e) {
+        e.preventDefault();
+        // Define global variable inputValue;
+        inputValue = $("#cityInput").val().trim()
+        // Display data on screen
+        displayWeatherData();
+    })
+
 
 })
