@@ -331,6 +331,10 @@ $(document).ready(function () {
         e.preventDefault();
         // Define global variable inputValue;
         inputValue = $("#cityInput").val().trim()
+        // Do nothing if inputValue is empty
+        if (inputValue == "") {
+            return;
+        }
         // Display data on screen
         displayWeatherData();
     })
