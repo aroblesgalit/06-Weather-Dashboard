@@ -60,6 +60,16 @@ header {
     min-height: 240px;
 }
 
+.tempVal {
+    color: #f2f2f2;
+    text-shadow: 1px 1px 0 #4c4c5c;
+}
+
+.tempUnit {
+    line-height: 1.4;
+    color: #f2f2f2;
+}
+
 .forecastCardWrapper {
     margin-bottom: 20px;
 }
@@ -72,6 +82,10 @@ header {
 
 .forecastDate {
     margin-bottom: 10px;
+}
+
+.otherInfo {
+    margin-top: 10px;
 }
 
 .uvIndex {

@@ -44,12 +44,12 @@ $(document).ready(function () {
                 var currentDataGraphic = $("<div>").addClass("uk-width-1-2 uk-flex uk-flex-column uk-flex-middle weatherGraphic");
                 var currentDataCity = $("<div>").addClass("uk-text-bold uk-text-large");
                 var currentDataDate = $("<div>");
-                var currentDataTemp = $("<div>").addClass("uk-heading-2xlarge uk-margin-remove");
-                var currentDataTempUnit = $("<span>").addClass("uk-heading-large uk-text-top");
-                var currentDataHumidity = $("<div>");
+                var currentDataTemp = $("<div>").addClass("uk-heading-2xlarge uk-margin-remove tempVal");
+                var currentDataTempUnit = $("<span>").addClass("uk-heading-large uk-text-top tempUnit");
+                var currentDataHumidity = $("<div>").addClass("otherInfo");
                 var currentHumidityLabel = $("<span>").addClass("uk-text-small");
                 var currentHumidityVal = $("<span>").addClass("uk-text-bold");
-                var currentDataWindSpeed = $("<div>");
+                var currentDataWindSpeed = $("<div>").addClass("otherInfo");
                 var currentWindSpeedLabel = $("<span>").addClass("uk-text-small");
                 var currentWindSpeedVal = $("<span>").addClass("uk-text-bold");
                 var currentWeatherImage = $("<img>");
@@ -92,7 +92,7 @@ $(document).ready(function () {
                     var currentDataText = $(".dataText");
                     
                     // Create divs and add class
-                    var currentDataUVIndex = $("<div>");
+                    var currentDataUVIndex = $("<div>").addClass("otherInfo");
                     var currentUVIndexLabel = $("<span>").addClass("uk-text-small");
                     var currentUVIndexVal = $("<span>").addClass("uk-text-bold uvIndex");
 
