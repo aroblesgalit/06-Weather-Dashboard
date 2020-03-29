@@ -1,9 +1,15 @@
 # 06 Weather Dashboard
-> Developed a weather dashboard that shows the current and future weather info
+> A weather dashboard that shows the current and future weather information of a city
 
-Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
-
-Use the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. The documentation includes a section called "How to start" that will provide basic setup and usage instructions. Use `localStorage` to store any persistent data.
+This was a homework assignment where we built a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS. We were tasked with retrieving data from another application's API and using it in the context of their own. Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Specifically, we used [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities.
+## Completed
+* Designed the UI of the application with HTML and CSS
+* Dynamically updated HTML and CSS
+* Used a CSS framework called UIKit
+* Used the OpenWeather API to retrieve weather data for cities
+* Used local storage to store persistent data such as the search history
+* Used the stopPropagation event method on the search history chips to keep the delete button from triggering the chip
+* Used the JavaScript library, jQuery, for simplicity
 
 ## User Story
 
@@ -29,11 +35,10 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
 
-The following image demonstrates the application functionality:
-
-![weather dashboard demo](./assets/images/06-server-side-apis-homework-demo.png)
-
 ## Deployed Application
 [Weather Dashboard](https://aroblesgalit.github.io/06-Weather-Dashboard/)
 
 ## Screenshots
+![Weather Dasbhoard Screenshot - Large](https://github.com/aroblesgalit/06-Weather-Dashboard/blob/master/images/weatherDashScreenshotLarge.jpg?raw=true)
+![Weather Dasbhoard Screenshot - Small 1](https://github.com/aroblesgalit/06-Weather-Dashboard/blob/master/images/weatherDashScreenshotSmall1.jpg?raw=true)
+![Weather Dasbhoard Screenshot - Small 2](https://github.com/aroblesgalit/06-Weather-Dashboard/blob/master/images/weatherDashScreenshotSmall2.jpg?raw=true)
