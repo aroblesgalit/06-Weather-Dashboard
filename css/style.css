@@ -115,6 +115,12 @@ header {
 @media only screen and (max-width: 639px) {
     header {
         padding: 0 10px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #headerNav {
+        padding: 0 10px;
     }
 
     #logoType {
