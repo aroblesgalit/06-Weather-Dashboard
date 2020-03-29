@@ -1,26 +1,28 @@
 $(document).ready(function () {
-
+    // Add a submit event to the search form
     $("#searchForm").on("submit", function (e) {
         e.preventDefault();
 
+        // Target the div to append dynamically created divs to
         var todayWeatherSection = $(".todayWeatherSection");
-        // Clear section
+        // Clear section of any html
         todayWeatherSection.empty();
-
+        // Get value from the input field
         var inputValue = $("#cityInput").val();
+        // Store api key
         var APIKey = "5af80191049a5aac0e5b1a43d2d1ccfe";
-
+        // Store queryURL with the proper strings
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + inputValue + "&appid=" + APIKey;
 
-
+        // Use ajax to get data for the city
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
-
+            
+            // Use response to get the necessary data: City name, Temperature in Fahrenheit, Humidity, Wind speed, and Coordinates (to use for UV Index)
             var curCity = response.name;
-            var curDateTime = moment().format('MMM Do, h:mm a');
+            var curDateTime = moment().format('MMM Do, h:mm a'); // Get current time using moment.js
             var curKelvinTemp = response.main.temp;
             var curFahrenheit = ((curKelvinTemp - 273.15) * 1.80 + 32).toFixed();
             var curHumidity = response.main.humidity;
@@ -29,14 +31,11 @@ $(document).ready(function () {
             var curWeatherDes = response.weather[0].description;
             var cityLat = response.coord.lat;
             var cityLon = response.coord.lon;
-            // var cityCoord = [cityLat, cityLon];
 
-            // // Store cityLat and cityLon to localStorage
-            // localStorage.setItem("cityCoord", cityCoord);
-
+            // Render data and display to the screen
             renderData();
 
-            // Render data on screen
+            // Create a function to render data
             function renderData() {
                 // Create divs and add classes
                 var currentWeatherData = $("<div>").addClass("uk-grid");
@@ -64,10 +63,9 @@ $(document).ready(function () {
                 currentWindSpeedLabel.text("Wind Speed: ");
                 currentWindSpeedVal.text(curWindSpeed + "kph");
                 currentWeatherImage.attr({ "data-src": curWeatherIcon, alt: "Weather Icon", "uk-img": "", width: "200px" });
-                // currentWeatherImage.attr({"data-src": curWeatherIcon, alt: "Weather Icon", width: "200px"});
                 currentWeatherDescription.text(curWeatherDes);
 
-                // Append
+                // Append to each other
                 currentDataWindSpeed.append(currentWindSpeedLabel).append(currentWindSpeedVal);
                 currentDataHumidity.append(currentHumidityLabel).append(currentHumidityVal);
                 currentDataTemp.append(currentDataTempUnit);
@@ -77,29 +75,33 @@ $(document).ready(function () {
                 todayWeatherSection.append(currentWeatherData);
             }
 
-            // var cityCoord = localStorage.getItem("cityCoord");
+
+            // Store the queryURL needed to get the data for UV Index
             var queryURL2 = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + cityLat + "&lon=" + cityLon;
-            // Find the UV Index
+            // Use a separate ajax call for getting the UV Index with a different queryURL
             $.ajax({
                 url: queryURL2,
                 method: "GET"
             }).then(function(response) {
+                // Get the UV Index value and store in a variable
                 var uvIndexVal = response.value;
 
+                // Render the UV Index and display on screen
                 renderUVIndex();
-                // Render uv index
+
+                // Create a function that would render the UV Index
                 function renderUVIndex() {
+                    // Target the div where to append the UV Index
                     var currentDataText = $(".dataText");
                     
                     // Create divs and add class
                     var currentDataUVIndex = $("<div>").addClass("otherInfo");
                     var currentUVIndexLabel = $("<span>").addClass("uk-text-small");
                     var currentUVIndexVal = $("<span>").addClass("uk-text-bold uvIndex");
-
                     // Set contexts
                     currentUVIndexLabel.text("UV Index: ");
                     currentUVIndexVal.text(uvIndexVal);
-
+                    // Create conditionals for color coding
                     if (uvIndexVal >= 0 && uvIndexVal < 3) {
                         currentUVIndexVal.css("color", "var(--very-low)");
                     } else if (uvIndexVal >= 3 && uvIndexVal < 5) {
