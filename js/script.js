@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    // Get the current hour using moment.js in the 24 hour format for use in later conditional statements
+    var currentHour = moment().format('H');
+
     // Target search history section to append new Ul and li's to it
     var searchHistorySection = $("#searchHistory");
 
@@ -52,13 +55,11 @@ $(document).ready(function () {
         renderBackground();
     }
 
-    // Create a funciton to change the background gradient depending on current time
+    // Create a function to change the background gradient depending on current time
     function renderBackground() {
-        // Target the todayWeather section
+        // Target divs
         var todayWeather = $("#todayWeather");
-        // Get the current hour using moment.js in the 24 hour format
-        var currentHour = moment().format('H');
-        console.log(currentHour)
+        // Adjust color based on the current hour
         if (currentHour >= 6 && currentHour < 19) {
             todayWeather.css("background-image", "var(--daytime)");
         } else {
@@ -155,7 +156,14 @@ $(document).ready(function () {
                 var currentWindSpeedLabel = $("<span>").addClass("uk-text-small");
                 var currentWindSpeedVal = $("<span>").addClass("uk-text-bold");
                 var currentWeatherImage = $("<img>");
-                var currentWeatherDescription = $("<p>").addClass("uk-text-small uk-light uk-margin-remove uk-padding-large uk-padding-remove-vertical");
+                var currentWeatherDescription = $("<p>").addClass("weatherDes uk-text-small uk-margin-remove uk-padding-large uk-padding-remove-vertical");
+                // Change color of weather description based on the current time
+                if (currentHour >= 6 && currentHour < 19) {
+                    currentWeatherDescription.addClass("uk-mute");
+                } else {
+                    currentWeatherDescription.addClass("uk-light");
+                }
+
                 // Set contexts
                 currentDataCity.text(curCity); // Get city from response
                 currentDataDate.text(curDateTime); // Use moment.js
