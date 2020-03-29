@@ -52,14 +52,19 @@ $(document).ready(function () {
         renderSearchHistory();
     }
 
-    // Listen to an event when a button from the search history bar is clicked
-    $(document).on("click", ".cityChip", function() {
-        var cityChipText = $(this).text();            
+    // Declare global variable inputValue for use on events
+    var inputValue;
 
+    // Listen to an event when a button from the search history bar is clicked
+    $(document).on("click", ".cityChip", function () {
+        // Set input value to the text of the cityChip
+        inputValue = $(this).text();
+        // Display data on screen
+        displayWeatherData();
     })
 
     // Listen to an event when a close button is clicked
-    $(document).on("click", ".closeBtn", function() {
+    $(document).on("click", ".closeBtn", function () {
         // Get the text of it's parent element
         var cityChipText = $(this).parent().text();
         // Find its index in the search history array
@@ -72,9 +77,7 @@ $(document).ready(function () {
         renderSearchHistory();
     })
 
-    // Add a submit event to the search form
-    $("#searchForm").on("submit", function (e) {
-        e.preventDefault();
+    function displayWeatherData() {
 
         // Target the div to append dynamically created divs to
         var todayWeatherSection = $(".todayWeatherSection");
@@ -82,13 +85,10 @@ $(document).ready(function () {
         todayWeatherSection.empty();
         // $(".fiveDaySection").empty();
         $(".fiveDaySection").children().not(':first').remove();
-        // Get value from the input field
-        var inputValue = $("#cityInput").val().trim();
         // Store api key
         var APIKey = "5af80191049a5aac0e5b1a43d2d1ccfe";
         // Store queryURL with the proper strings
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + inputValue + "&appid=" + APIKey;
-
 
         // If the inputValue is not empty
         if (inputValue !== "" && searchHistoryArr.indexOf(inputValue) == -1) {
@@ -100,7 +100,6 @@ $(document).ready(function () {
             // Then clear the input field
             $("#cityInput").val("");
         }
-
 
         // Use ajax to get data for the city
         $.ajax({
@@ -173,7 +172,6 @@ $(document).ready(function () {
             }).then(function (response) {
                 // Get the UV Index value and store in a variable
                 var uvIndexVal = response.value;
-                console.log(response);
                 // Render the UV Index and display on screen
                 renderUVIndex();
 
@@ -212,7 +210,7 @@ $(document).ready(function () {
 
             // Store the queryURL needed to get the data for the 5-day forecast
             var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?q=" + inputValue + "&appid=" + APIKey;
-            console.log(queryURL3)
+
             // Use a separate ajax call for getting the UV Index with a different queryURL
             $.ajax({
                 url: queryURL3,
@@ -289,13 +287,20 @@ $(document).ready(function () {
 
             })
 
-
         })
         // Clear the input field
         $("#cityInput").val("");
+
+    }
+
+    // Add a submit event to the search form
+    $("#searchForm").on("submit", function (e) {
+        e.preventDefault();
+        // Define global variable inputValue;
+        inputValue = $("#cityInput").val().trim()
+        // Display data on screen
+        displayWeatherData();
     })
-
-
 
 
 })
