@@ -55,6 +55,10 @@ header {
     background-color: #c0c0c0;
 }
 
+.defaultText {
+    font-size: 18px;
+}
+
 #todayWeather {
     /* background-image: linear-gradient(to right, rgb(255, 168, 53) , rgb(253, 253, 84)); */ /* Sunny */
     /* background-image: linear-gradient(to right, rgb(117, 117, 182), rgb(133, 106, 168)); Cloudy */
