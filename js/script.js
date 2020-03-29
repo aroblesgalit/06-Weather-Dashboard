@@ -59,6 +59,7 @@ $(document).ready(function () {
         var todayWeatherSection = $(".todayWeatherSection");
         // Clear section of any html
         todayWeatherSection.empty();
+        $(".fiveDaySection").empty();
         // Get value from the input field
         var inputValue = $("#cityInput").val().trim();
         // Store api key
@@ -191,8 +192,41 @@ $(document).ready(function () {
             $.ajax({
                 url: queryURL3,
                 method: "GET"
-            }).then(function(response) {
-                console.log(response);
+            }).then(function (response) {
+                // Get the current hour using moment.js in the 24 hour format
+
+                // Get list array
+                var listArray = response.list;
+
+                // Create a function to render data 
+                function renderForecast() {
+                    // Loop through array
+                    for (var i = 0; i < listArray.length; i++) {
+                        // Find the date and time data
+                        var date = listArray[i].dt_txt;
+                        // Create an instance of each date and time
+                        var d = new Date(date);
+                        // Get the hours
+                        var hr = d.getHours();
+                        // If the hours is greater than the current hour
+                        if (hr === 12) {
+                            // Then get the date, weather icon, temperature, humidity
+                            console.log(listArray[i]);
+                            // Create divs and add classes
+
+                            // Set the contexts
+
+                            // Append
+                        }
+
+                    }
+
+                    // var d = new Date(date);
+                    // console.log(d.getHours()); // => 9
+                    // console.log(d.getMinutes()); // =>  30
+                    // console.log(d.getSeconds()); // => 51
+                }
+
             })
 
 
