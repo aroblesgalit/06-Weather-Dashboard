@@ -171,7 +171,7 @@ $(document).ready(function () {
 
                 // To display searched city's local date and time
                 var apiKeyTimezone = "KDN1W1M1XRYJ";
-                var queryURLTimezone = "http://api.timezonedb.com/v2.1/get-time-zone?key=" + apiKeyTimezone + "&format=json" + "&by=position" + "&lat=" + cityLat + "&lng=" + cityLon;
+                var queryURLTimezone = "https://api.timezonedb.com/v2.1/get-time-zone?key=" + apiKeyTimezone + "&format=json" + "&by=position" + "&lat=" + cityLat + "&lng=" + cityLon;
 
                 $.ajax({
                     url: queryURLTimezone,
