@@ -1,8 +1,5 @@
 $(document).ready(function () {
 
-    // Get the current hour using moment.js in the 24 hour format for use in later conditional statements
-    var currentHour = moment().format('H');
-
     // Use to get data
     var forecastWeekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var forecastMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -56,22 +53,9 @@ $(document).ready(function () {
         }
         // Render array to the DOM
         renderSearchHistory();
-
-        // Render background color
-        renderBackground();
     }
 
-    // Create a function to change the background gradient depending on current time
-    function renderBackground() {
-        // Target divs
-        var todayWeather = $("#todayWeather");
-        // Adjust color based on the current hour
-        if (currentHour >= 6 && currentHour < 19) {
-            todayWeather.css("background-image", "var(--daytime)");
-        } else {
-            todayWeather.css("background-image", "var(--nighttime)");
-        }
-    }
+
 
     // Declare global variable inputValue for use on events
     var inputValue;
@@ -164,12 +148,7 @@ $(document).ready(function () {
                 var currentWindSpeedVal = $("<span>").addClass("uk-text-bold");
                 var currentWeatherImage = $("<img>");
                 var currentWeatherDescription = $("<p>").addClass("weatherDes uk-text-small uk-margin-remove uk-padding-large uk-padding-remove-vertical");
-                // Change color of weather description based on the current time
-                if (currentHour >= 6 && currentHour < 19) {
-                    currentWeatherDescription.addClass("uk-mute");
-                } else {
-                    currentWeatherDescription.addClass("uk-light");
-                }
+
 
                 // Set contexts
                 currentDataCity.text(curCity + ", " + curCountry); // Get city from response
@@ -225,6 +204,22 @@ $(document).ready(function () {
 
                     var currentDataDate = $("<div>").text(cityDateTimeFormatted);
                     currentDataText.prepend(currentDataDate);
+
+
+                    renderBackground();
+                    // Create a function to change the background gradient depending on current time
+                    function renderBackground() {
+                        // Target divs
+                        var todayWeather = $("#todayWeather");
+                        // Adjust color based on the city's local hour
+                        if (cityHour >= 6 && cityHour < 19) {
+                            todayWeather.css("background-image", "var(--daytime)");
+                            currentWeatherDescription.addClass("uk-mute");
+                        } else {
+                            todayWeather.css("background-image", "var(--nighttime)");
+                            currentWeatherDescription.addClass("uk-light");
+                        }
+                    }
                 })
 
 
@@ -282,15 +277,12 @@ $(document).ready(function () {
                 url: queryURL3,
                 method: "GET"
             }).then(function (response) {
-                // Get the current hour using moment.js in the 24 hour format -- If I want to use more logic
-                // var currentHour = moment().format('H');
 
                 // Target fiveDaySection
                 var fiveDaySection = $(".fiveDaySection");
 
                 // Get list array
                 var listArray = response.list;
-
 
                 renderForecast();
                 // Create a function to render data for the forecast
