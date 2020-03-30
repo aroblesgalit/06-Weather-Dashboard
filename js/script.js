@@ -3,6 +3,12 @@ $(document).ready(function () {
     // Get the current hour using moment.js in the 24 hour format for use in later conditional statements
     var currentHour = moment().format('H');
 
+    // Use to get data
+    var forecastWeekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var forecastMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var forecastDates = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th", "30th", "31st"];
+    var forecastTimes = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
     // Target search history section to append new Ul and li's to it
     var searchHistorySection = $("#searchHistory");
 
@@ -126,7 +132,7 @@ $(document).ready(function () {
 
             // Use response to get the necessary data: City name, Temperature in Fahrenheit, Humidity, Wind speed, and Coordinates (to use for UV Index)
             var curCity = response.name;
-            var curDateTime = moment().format('MMM Do, h:mm a'); // Get current time using moment.js
+            // var curDateTime = moment().format('MMM Do, h:mm a'); // Get current time using moment.js
             var curKelvinTemp = response.main.temp;
             var curFahrenheit = ((curKelvinTemp - 273.15) * 1.80 + 32).toFixed();
             var curHumidity = response.main.humidity;
@@ -146,7 +152,7 @@ $(document).ready(function () {
                 var currentDataText = $("<div>").addClass("uk-width-1-2 uk-text-secondary dataText");
                 var currentDataGraphic = $("<div>").addClass("uk-width-1-2 uk-flex uk-flex-column uk-flex-middle weatherGraphic");
                 var currentDataCity = $("<div>").addClass("uk-text-bold uk-text-large");
-                var currentDataDate = $("<div>");
+                var currentDataDate = $("<div>").addClass("currentDataDate");
                 var currentDataTemp = $("<div>").addClass("uk-heading-2xlarge uk-margin-remove tempVal");
                 var currentDataTempUnit = $("<span>").addClass("uk-heading-large uk-text-top tempUnit");
                 var currentDataHumidity = $("<div>").addClass("otherInfo");
@@ -166,7 +172,7 @@ $(document).ready(function () {
 
                 // Set contexts
                 currentDataCity.text(curCity); // Get city from response
-                currentDataDate.text(curDateTime); // Use moment.js
+                // currentDataDate.text(curDateTime); // Use moment.js
                 currentDataTemp.text(curFahrenheit); // Get temp from response
                 currentDataTempUnit.html("&#176F");
                 currentHumidityLabel.text("Humidity: ");
@@ -185,6 +191,39 @@ $(document).ready(function () {
                 currentWeatherData.append(currentDataText).append(currentDataGraphic);
                 todayWeatherSection.append(currentWeatherData);
             }
+
+            // To display searched city's local date and time
+            var APIKey4 = "KDN1W1M1XRYJ";
+            var queryURL4 = "http://api.timezonedb.com/v2.1/get-time-zone?key=" + APIKey4 + "&format=json" + "&by=position" + "&lat=" + cityLat + "&lng=" + cityLon;
+
+            $.ajax({
+                url: queryURL4,
+                method: "GET"
+            }).then(function (response) {
+                var cityDateTimeUnformated = response.formatted;
+                // Create an instance of each date and time
+                var cityDateInstance = new Date(cityDateTimeUnformated);
+                // Get Month
+                var cityMonth = forecastMonths[cityDateInstance.getMonth()];
+                // Get Day of month
+                var cityDayOfMonth = forecastDates[cityDateInstance.getDate() - 1];
+                // Get the hour
+                var cityHour = forecastTimes[cityDateInstance.getHours()];
+                // Get minutes
+                var cityMinutes = cityDateInstance.getMinutes();
+                if (cityMinutes < 10) {
+                    cityMinutes = "0" + cityMinutes;
+                }
+                // Get am or pm
+                var cityTimePeriod;
+                if (cityDateInstance.getHours() >= 0 && cityDateInstance.getHours() < 12) {
+                    cityTimePeriod = "am";
+                } else {
+                    cityTimePeriod = "pm";
+                }
+                var cityDateTimeFormatted = cityMonth + " " + cityDayOfMonth + ", " + cityHour + ":" + cityMinutes + " " + cityTimePeriod;
+                $(".currentDataDate").text(cityDateTimeFormatted);
+            })
 
 
             // Store the queryURL needed to get the data for UV Index
@@ -248,10 +287,6 @@ $(document).ready(function () {
 
                 // Get list array
                 var listArray = response.list;
-
-                // Use to get data
-                var forecastWeekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                var forecastMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 
                 renderForecast();
