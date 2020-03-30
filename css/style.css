@@ -60,8 +60,8 @@ header {
 }
 
 #todayWeather {
-    /* background-image: linear-gradient(to right, rgb(84, 253, 140), rgb(53, 255, 255)); /* Daytime */
-    background-image: linear-gradient(to right, rgb(63, 186, 190), rgb(99, 145, 212)) /* Nighttime */
+    background-image: linear-gradient(to right, rgb(84, 253, 140), rgb(53, 255, 255)); /* Daytime */
+    /* background-image: linear-gradient(to right, rgb(63, 186, 190), rgb(99, 145, 212)) Nighttime */
 }
 
 .todayWeatherSection {
