@@ -129,7 +129,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-
+            console.log(response);
             // Use response to get the necessary data: City name, Temperature in Fahrenheit, Humidity, Wind speed, and Coordinates (to use for UV Index)
             var curCity = response.name;
             // var curDateTime = moment().format('MMM Do, h:mm a'); // Get current time using moment.js
@@ -152,7 +152,7 @@ $(document).ready(function () {
                 var currentDataText = $("<div>").addClass("uk-width-1-2 uk-text-secondary dataText");
                 var currentDataGraphic = $("<div>").addClass("uk-width-1-2 uk-flex uk-flex-column uk-flex-middle weatherGraphic");
                 var currentDataCity = $("<div>").addClass("uk-text-bold uk-text-large");
-                var currentDataDate = $("<div>").addClass("currentDataDate");
+
                 var currentDataTemp = $("<div>").addClass("uk-heading-2xlarge uk-margin-remove tempVal");
                 var currentDataTempUnit = $("<span>").addClass("uk-heading-large uk-text-top tempUnit");
                 var currentDataHumidity = $("<div>").addClass("otherInfo");
@@ -186,44 +186,48 @@ $(document).ready(function () {
                 currentDataWindSpeed.append(currentWindSpeedLabel).append(currentWindSpeedVal);
                 currentDataHumidity.append(currentHumidityLabel).append(currentHumidityVal);
                 currentDataTemp.append(currentDataTempUnit);
-                currentDataText.append(currentDataCity).append(currentDataDate).append(currentDataTemp).append(currentDataHumidity).append(currentDataWindSpeed);
+                currentDataText.append(currentDataCity).append(currentDataTemp).append(currentDataHumidity).append(currentDataWindSpeed);
                 currentDataGraphic.append(currentWeatherImage).append(currentWeatherDescription);
                 currentWeatherData.append(currentDataText).append(currentDataGraphic);
                 todayWeatherSection.append(currentWeatherData);
+
+
+                // To display searched city's local date and time
+                var APIKey4 = "KDN1W1M1XRYJ";
+                var queryURL4 = "http://api.timezonedb.com/v2.1/get-time-zone?key=" + APIKey4 + "&format=json" + "&by=position" + "&lat=" + cityLat + "&lng=" + cityLon;
+
+                $.ajax({
+                    url: queryURL4,
+                    method: "GET"
+                }).then(function (response) {
+                    var cityDateTimeUnformated = response.formatted;
+                    // Create an instance of each date and time
+                    var cityDateInstance = new Date(cityDateTimeUnformated);
+                    // Get Month
+                    var cityMonth = forecastMonths[cityDateInstance.getMonth()];
+                    // Get Day of month
+                    var cityDayOfMonth = forecastDates[cityDateInstance.getDate() - 1];
+                    // Get the hour
+                    var cityHour = forecastTimes[cityDateInstance.getHours()];
+                    // Get minutes
+                    var cityMinutes = cityDateInstance.getMinutes();
+                    if (cityMinutes < 10) {
+                        cityMinutes = "0" + cityMinutes;
+                    }
+                    // Get am or pm
+                    var cityTimePeriod;
+                    if (cityDateInstance.getHours() >= 0 && cityDateInstance.getHours() < 12) {
+                        cityTimePeriod = "am";
+                    } else {
+                        cityTimePeriod = "pm";
+                    }
+                    var cityDateTimeFormatted = cityMonth + " " + cityDayOfMonth + ", " + cityHour + ":" + cityMinutes + " " + cityTimePeriod;
+
+                    var currentDataDate = $("<div>").text(cityDateTimeFormatted);
+                    currentDataText.prepend(currentDataDate);
+                })
+
             }
-
-            // To display searched city's local date and time
-            var APIKey4 = "KDN1W1M1XRYJ";
-            var queryURL4 = "http://api.timezonedb.com/v2.1/get-time-zone?key=" + APIKey4 + "&format=json" + "&by=position" + "&lat=" + cityLat + "&lng=" + cityLon;
-
-            $.ajax({
-                url: queryURL4,
-                method: "GET"
-            }).then(function (response) {
-                var cityDateTimeUnformated = response.formatted;
-                // Create an instance of each date and time
-                var cityDateInstance = new Date(cityDateTimeUnformated);
-                // Get Month
-                var cityMonth = forecastMonths[cityDateInstance.getMonth()];
-                // Get Day of month
-                var cityDayOfMonth = forecastDates[cityDateInstance.getDate() - 1];
-                // Get the hour
-                var cityHour = forecastTimes[cityDateInstance.getHours()];
-                // Get minutes
-                var cityMinutes = cityDateInstance.getMinutes();
-                if (cityMinutes < 10) {
-                    cityMinutes = "0" + cityMinutes;
-                }
-                // Get am or pm
-                var cityTimePeriod;
-                if (cityDateInstance.getHours() >= 0 && cityDateInstance.getHours() < 12) {
-                    cityTimePeriod = "am";
-                } else {
-                    cityTimePeriod = "pm";
-                }
-                var cityDateTimeFormatted = cityMonth + " " + cityDayOfMonth + ", " + cityHour + ":" + cityMinutes + " " + cityTimePeriod;
-                $(".currentDataDate").text(cityDateTimeFormatted);
-            })
 
 
             // Store the queryURL needed to get the data for UV Index
