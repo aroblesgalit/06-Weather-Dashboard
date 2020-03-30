@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    // Use to get data
+    // Use to get data for getting the date and time
     var forecastWeekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var forecastMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var forecastDates = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th", "30th", "31st"];
@@ -12,11 +12,10 @@ $(document).ready(function () {
     // Create a search history array
     var searchHistoryArr = [];
 
-    // Store array into local storage
+    // Store search history array into local storage
     function storeSearchHistory() {
         localStorage.setItem("searchHistoryArr", JSON.stringify(searchHistoryArr));
     }
-
 
     // Create a function to render search history
     function renderSearchHistory() {
@@ -84,8 +83,8 @@ $(document).ready(function () {
         renderSearchHistory();
     })
 
+    // Create a function that calls the weather api using ajax and displays the data requested
     function displayWeatherData() {
-
         // Target the div to append dynamically created divs to
         var todayWeatherSection = $(".todayWeatherSection");
         // Clear section of any html
@@ -137,7 +136,6 @@ $(document).ready(function () {
                 var currentDataText = $("<div>").addClass("uk-width-1-2 uk-text-secondary dataText");
                 var currentDataGraphic = $("<div>").addClass("uk-width-1-2 uk-flex uk-flex-column uk-flex-middle weatherGraphic");
                 var currentDataCity = $("<div>").addClass("uk-text-bold uk-text-large");
-
                 var currentDataTemp = $("<div>").addClass("uk-heading-2xlarge uk-margin-remove tempVal");
                 var currentDataTempUnit = $("<span>").addClass("uk-heading-large uk-text-top tempUnit");
                 var currentDataHumidity = $("<div>").addClass("otherInfo");
@@ -172,13 +170,14 @@ $(document).ready(function () {
 
 
                 // To display searched city's local date and time
-                var APIKey4 = "KDN1W1M1XRYJ";
-                var queryURL4 = "http://api.timezonedb.com/v2.1/get-time-zone?key=" + APIKey4 + "&format=json" + "&by=position" + "&lat=" + cityLat + "&lng=" + cityLon;
+                var apiKeyTimezone = "KDN1W1M1XRYJ";
+                var queryURLTimezone = "http://api.timezonedb.com/v2.1/get-time-zone?key=" + apiKeyTimezone + "&format=json" + "&by=position" + "&lat=" + cityLat + "&lng=" + cityLon;
 
                 $.ajax({
-                    url: queryURL4,
+                    url: queryURLTimezone,
                     method: "GET"
                 }).then(function (response) {
+                    // Request for the city's local date and time
                     var cityDateTimeUnformated = response.formatted;
                     // Create an instance of each date and time
                     var cityDateInstance = new Date(cityDateTimeUnformated);
@@ -190,6 +189,7 @@ $(document).ready(function () {
                     var cityHour = forecastTimes[cityDateInstance.getHours()];
                     // Get minutes
                     var cityMinutes = cityDateInstance.getMinutes();
+                    // If minutes is less than 10, add a 0 in front of it
                     if (cityMinutes < 10) {
                         cityMinutes = "0" + cityMinutes;
                     }
@@ -200,17 +200,21 @@ $(document).ready(function () {
                     } else {
                         cityTimePeriod = "pm";
                     }
+                    // Format the date and time
                     var cityDateTimeFormatted = cityMonth + " " + cityDayOfMonth + ", " + cityHour + ":" + cityMinutes + " " + cityTimePeriod;
-
+                    // Create a div to add the formatted date and time to
                     var currentDataDate = $("<div>").text(cityDateTimeFormatted);
+                    // Prepend it to the currentDataText div
                     currentDataText.prepend(currentDataDate);
 
 
                     renderBackground();
-                    // Create a function to change the background gradient depending on current time
+                    // Create a function to change the background gradient depending on city's local time
                     function renderBackground() {
                         // Target divs
                         var todayWeather = $("#todayWeather");
+                        // Get cityHour in 24-hr format
+                        var cityHour = cityDateInstance.getHours();
                         // Adjust color based on the city's local hour
                         if (cityHour >= 6 && cityHour < 19) {
                             todayWeather.css("background-image", "var(--daytime)");

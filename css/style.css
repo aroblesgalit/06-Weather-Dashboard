@@ -60,9 +60,8 @@ header {
 }
 
 #todayWeather {
-    /* background-image: linear-gradient(to right, rgb(255, 168, 53) , rgb(253, 253, 84)); */ /* Sunny */
-    /* background-image: linear-gradient(to right, rgb(117, 117, 182), rgb(133, 106, 168)); Cloudy */
-    background-image: linear-gradient(to right, rgb(63, 186, 190), rgb(99, 145, 212)) /* Daytime part cloudy */
+    /* background-image: linear-gradient(to right, rgb(84, 253, 140), rgb(53, 255, 255)); /* Daytime */
+    background-image: linear-gradient(to right, rgb(63, 186, 190), rgb(99, 145, 212)) /* Nighttime */
 }
 
 .todayWeatherSection {
